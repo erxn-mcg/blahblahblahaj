@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+body {font-family: 'Poppins', sans-serif; margin:0; background-color: rgb(115, 179, 190);}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.text {
+  color: #000;
+  font-size: 20px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 60px;
+  width: 100%;
+  text-align: center;
+}
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 16px}
+}
+
+img {
+  max-height: 218px;
+}
+
+.h1 {
+    margin-top: 10px;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Poppins';
+}
+
+.h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.back {
+    margin: 10px;
+    color: #a56a6a
+}
+
+.back:hover {
+    color: #bb3b3b;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+    <a href="more.html"><p class="back">EXIT</p></a>
+    <p class="h1">Speak to Blahaj</p>
+    <p class="h2">Always wanted to know how sharks sleep, or how many teeth they have? Well, you are in the right place!</p>
+    <p class="h3">Check out some of the questions you can ask;</p>
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+          <div class="numbertext">1 / 3</div>
+          <img src="https://assets.atlasobscura.com/article_images/800x/17178/image.jpg" style="width:100%">
+          <div class="text">Do Sharks have a Sixth Sense?</div>
+        </div>
+        
+        <div class="mySlides fade">
+          <div class="numbertext">2 / 3</div>
+          <img src="data:image/jpeg;base64,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" style="width:100%">
+          <div class="text">Can Sharks Smell Blood?</div>
+        </div>
+        
+        <div class="mySlides fade">
+          <div class="numbertext">3 / 3</div>
+          <img src="https://townsquare.media/site/76/files/2017/06/A38.jpg?w=980&q=75" style="width:100%">
+          <div class="text">Are there Sharks in Lakes?</div>
+        </div>
+        
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        
+        </div>
+        <br>
+        
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span> 
+          <span class="dot" onclick="currentSlide(2)"></span> 
+          <span class="dot" onclick="currentSlide(3)"></span> 
+        </div>
+        <p style="text-align: center; margin-top: 20px;">Click on the button below!</p> 
+        
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  chat-icon="https:&#x2F;&#x2F;i.postimg.cc&#x2F;NLqT7XNK&#x2F;logoo.png"
+  intent="WELCOME"
+  chat-title="Blahaj"
+  agent-id="d445cd1b-f43b-4d84-a853-7104a4df50f6"
+  language-code="en"
+></df-messenger>
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+    </script>
+</body>
+</html>
