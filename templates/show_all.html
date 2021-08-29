@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2 style="text-align: center;">Your Tasks</h2>
+  <form style="width: 100%;" action="{{ url_for('update_done') }}" method=post>
+    <table class=todos>
+      <tr>
+        <th style="width: 50%">Task
+        <th style="width: 42%">Created At
+        <th style="float: right;">Done?
+      {%- for todo in todos %}
+      <br />
+      <tr class=title>
+        <td style="text-align: center;">{{ todo.title }}
+          
+        <td style="text-align: center;">{{ todo.pub_date.strftime('%Y-%m-%d') }}
+        <td><input style="text-align: center; margin-left: 50px;" type=checkbox name=done.{{ todo.id }}{{ " checked" if todo.done }}>
+          <tr class=text style="justify-content: center;">
+            <td style="width: 50%; border-bottom: 2px solid white;" colspan=3>{{ todo.text }}</td>
+       
+      {%- endfor %}
+    </table>
+    <p>
+      <input style="height: 30px; font-size: 20px; width: 100px; border-radius: 5px; display: block; margin-right: auto; margin-left: auto; color: #fff; background: #aaa; border: 2px solid #fff;" type=submit value="Update">
+      <a style="display: block; margin-right: auto; margin-left: auto; text-decoration: none; color: rgb(201, 107, 107)" href="{{ url_for('new') }}">New item</a>
+  </form>
+{% endblock %}
