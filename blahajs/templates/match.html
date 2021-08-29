@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>2048 Blahaj</title>
+  <style>
+      body {
+  background-color: #eff8fa;
+}
+
+.header {
+  margin: 0px auto;
+  width: 350px;
+  color: #3a7e9e;
+}
+
+.scores-container {
+  float: right;
+  text-align: right;
+}
+
+.score-container {
+  position: relative;
+  display: inline-block;
+  background: #b4def7;
+  padding: 15px 25px;
+  font-size: 15px;
+  height: 25px;
+  line-height: 47px;
+  font-weight: bold;
+  border-radius: 3px;
+  color: white;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.score-container:after {
+  content: "Score";
+  position: absolute;
+  width: 100%;
+  top: 10px;
+  left: 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 13px;
+  text-align: center;
+  color: #517597;
+}
+
+.logo {
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.sub-header {
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 45px;
+  height: 45px;
+}
+
+#board {
+  position:relative;
+  margin: 50px auto;
+  width: 350px;
+  height: 350px;
+  background-color: #78adcc;
+  border-radius:3px;
+}
+
+#restart {
+  display:inline-block;
+  font-size: 12px;
+  background: #6daee4;
+  border-radius: 3px;
+  padding: 0 10px;
+  text-decoration: none;
+  color: #f2f8f9;
+  height: 40px;
+  line-height: 42px;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  float: right;
+  border: 0px;
+  text-transform: uppercase;
+}
+
+.blanks {
+  position:absolute;
+  display:inline-block;
+  z-index:0;
+  background-color: #b6dae9;
+  width: 75px;
+  height: 75px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius:3px;
+}
+
+.tiles {
+  position:absolute;
+  display:inline-block;
+  z-index:1;
+  background-color: #daeaee;
+  width: 75px;
+  height: 75px;
+  line-height: 25px;
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: left;
+  font-weight: bold;
+  z-index: 10;
+  font-size: 30px;
+  color: #4177b4;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  border-radius:3px;
+}
+
+#board .tile-2 {
+    background: url(https://i.postimg.cc/kgyq4gjT/Webp-net-resizeimage.png);
+}
+
+#board .tile-4 {
+    background: url(https://i.postimg.cc/vTSxCvn6/Webp-net-resizeimage.png);
+}
+
+#board .tile-8 {
+  background: url(https://i.postimg.cc/SxbxR5mx/Webp-net-resizeimage.png) 
+}
+
+#board .tile-16 {
+  background: url(https://i.postimg.cc/sfthPT3t/Webp-net-resizeimage-2.png); 
+}
+
+#board .tile-32 {
+  background: url(https://i.postimg.cc/3J13rwfn/Webp-net-resizeimage.png); 
+}
+
+#board .tile-64 {
+  background: url(https://i.postimg.cc/m2zSBcrG/Webp-net-resizeimage-2.png); 
+
+}
+
+#board .tile-128 {
+  background: url(https://i.postimg.cc/mkNVfJw6/Webp-net-resizeimage-3.png); 
+  font-size: 25px; 
+  color: #000;
+}
+
+#board .tile-256 {
+  color: #f9f6f2;
+  background: url(https://i.postimg.cc/LsKqL5RL/Webp-net-resizeimage.png);  
+  font-size: 25px; 
+}
+
+#board .tile-512 {
+  color: #f9f6f2;
+  background: url(https://i.postimg.cc/yNyNRTLC/Webp-net-resizeimage-2.png); 
+  font-size: 25px; 
+}
+
+#board .tile-1024 {
+  color: #f9f6f2;
+  background: url(https://i.postimg.cc/zDs393bM/Webp-net-resizeimage-3.png);  
+  font-size: 15px; 
+}
+
+#board .tile-2048 {
+  color: #f9f6f2;
+  background: url(https://i.postimg.cc/d0NVn0c5/Webp-net-resizeimage-4.png); 
+  font-size: 15px; 
+}
+
+#board .tile-super {
+  color: #f9f6f2;
+  background: #3c3a32;
+  font-size: 20px; 
+}
+
+.back {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 20px;
+    color: #b44141;
+}
+
+.back:hover {
+    color: #741d1d;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+</style>
+
+</head>
+<body>
+<div class="page">
+    <a href="/arcade"><div class="back">
+        <p>EXIT</p>
+    </div></a>
+  <div class="header">
+    <div><span class="logo">Blahaj Match</span>
+      <div class="scores-container">
+        <div class="score-container" id="score">0</div>
+      </div>
+    </div>
+    <div class="sub-header"><span>Join the blahaj for the <b>ultimate</b> blahaj!</span>
+        <br />
+      <button id="restart">New Game</button>
+    </div>
+  </div>
+  <div id="board"><span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    <span class="blanks"></span>
+    
+  </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/animatelo/1.0.3/animatelo.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Tocca.js/2.0.3/Tocca.min.js'></script>
+<script>
+    class Position {
+  constructor(x,y) {
+    this.x = x;
+    this.y = y; 
+  }
+}
+
+class EmptyTile {
+  constructor(x,y) {
+    this.x = x;
+    this.y = y; 
+  }
+  
+  getPosition() {
+    return new Position(this.x,this.y);
+  }
+  
+  update(x,y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+class Tile {
+  constructor (x,y,value) {
+    this.x = x;
+    this.y = y;
+    this.value = value; 
+    
+    //create tile element
+    let span = document.createElement('span');
+    span.setAttribute('class', 'tiles');
+    this.element=span;
+    //append element to board
+    $('#board').append(this.element);
+    
+    this.render();
+  }
+  
+  render () {
+    $(this.getElement()).text(this.value);
+    $(this.getElement()).css({
+      top: this.x * 85 +'px',
+      left: this.y * 85 +'px'      
+    });
+    if(this.getValue()>2048) {
+      $(this.getElement()).addClass('tile-super');
+    }
+    else {
+      $(this.getElement()).addClass('tile-' + this.getValue());
+    }    
+  }
+  
+  getElement () {
+    return this.element;
+  }
+  
+  getPosition() {
+    return new Position(this.x,this.y);
+  }
+  
+  slideTo (position,callback) {
+    this.x=position.x;
+    this.y=position.y;
+    
+    $(this.getElement()).animate({
+      top: position.x * 85 +'px',
+      left: position.y * 85 +'px',
+    },'fast',callback);
+  }
+  
+  destroy () {
+    $(this.getElement()).remove();
+  }
+  
+  getValue () {
+    return this.value;
+  }
+  
+  setValue (value) {
+    this.value=value;    
+  }  
+  
+  zoomIn () {
+    window.animatelo.zoomIn(this.getElement(), {
+  duration: 200});
+  }
+}
+
+class Board {  
+  constructor() {
+    this.tiles=[];
+    this.score=0;
+    this.spawnOnSlide=false;
+    this.init();    
+  }
+  
+  init() {
+    $('.blanks').each(function(index,ele) {
+    let x=parseInt(index / 4);
+    let y=index % 4;
+    $(ele).css({
+       top: (x*85)+'px',
+       left: (y*85)+'px'      
+      });      
+    });
+    
+  }
+  
+  setScore (value) {
+    this.score=value;
+    $('#score').text(this.score);
+  }
+  
+  getScore() {
+    return this.score;
+  }
+  
+  getTile (x,y) {
+    for(let tile of this.tiles) {
+      if(tile.x==x && tile.y==y)
+        return tile;
+    }
+    return undefined;
+  }
+  
+  swipe (direction) {
+    let sets=[];    
+    for(let x=0; x<4; x++) {
+      let set=[];
+      for(let y=0; y<4; y++) {
+        switch(direction){
+          case "LEFT": {
+            let tile=this.getTile(x,y);
+            if(tile) {
+              set.push(tile);  
+            }
+            else {
+              set.push(new EmptyTile(x,y));  
+            }
+          }                        
+          break;
+          case "RIGHT": {            
+            let tile=this.getTile(x,3-y);
+            if(tile) {
+              set.push(tile);  
+            }
+            else {
+              set.push(new EmptyTile(x,3-y));  
+            }
+          }            
+          break;
+          case "DOWN": {
+            let tile=this.getTile(3-y,x);
+            if(tile) {
+              set.push(tile);  
+            }
+            else {
+              set.push(new EmptyTile(3-y,x));  
+            }
+          }            
+          break;
+          case "UP": {
+           let tile=this.getTile(y,x);
+            if(tile) {
+              set.push(tile);  
+            }
+            else {
+              set.push(new EmptyTile(y,x));  
+            } 
+          }            
+          break;
+        }
+      }
+      sets.push(set);
+    }
+        
+    for (let set of sets) {
+      this.slide(set);
+    }
+    
+    if(this.spawnOnSlide) {
+      this.spawnTile(); 
+      this.spawnOnSlide=false;
+    }    
+  }
+  
+  newGame () {
+    for(let tile of this.tiles) {
+      tile.destroy();
+    }    
+    this.tiles=[];    
+    for(let i=0; i<2; i++) {
+      this.spawnTile();
+    }
+    this.setScore(0);
+  }
+  
+  spawnTile () {
+    let positions=this.getEmptyPositions();
+    let index=this.getRandomRange(0,positions.length-1);
+    let position=positions[index];
+    let tile = new Tile(position.x,position.y, this.getRandomValue());
+    tile.zoomIn();
+    this.tiles.push(tile);
+  }
+  
+  getRandomValue() {
+    let values=[2];
+    if(this.getScore() > 0) {
+      values.push(4);
+    }
+    return values[this.getRandomRange(0, values.length-1)];
+  }
+  
+  getEmptyPositions () {
+    let positions=[];
+    for(let x=0; x<4; x++) {
+      for(let y=0; y<4; y++) {
+        if(!this.getTile(x,y)) {
+          positions.push(new Position(x,y));
+        }          
+      }
+    }
+    return positions;
+  }
+  
+  slide (set) {       
+    for (let i=0; i<set.length; i++) {
+      let tile=set[i];
+      if(i>0) {        
+        if(tile instanceof Tile) {          
+          let previousTiles=set.slice(0,i);          
+          
+          let filledTile=previousTiles.filter(t=> t instanceof Tile).reverse().shift();          
+          //if same value is found in previous tile
+          //merge tiles and replace current tile with empty
+          if(filledTile && filledTile.getValue() == tile.getValue()) {
+            let index=set.indexOf(filledTile);            
+            set[index]= tile;
+            set[i]=new EmptyTile(tile.x, tile.y);
+            let newPos=filledTile.getPosition();
+            let board=this;
+            tile.setValue(tile.getValue()*2);
+            this.tiles.splice( this.tiles.indexOf(filledTile), 1);
+            tile.slideTo(newPos, function() {
+              filledTile.destroy();              
+              board.setScore( board.getScore() + tile.getValue());
+              tile.render();
+              tile.zoomIn();              
+            });            
+            
+            this.spawnOnSlide=true;
+          } 
+          //if empty tiles found in previous tiles
+          //switch tiles and update positions
+          else {            
+            let emptyTile=previousTiles.filter( t => t instanceof EmptyTile).shift();
+            if(emptyTile) {                         
+              let index=set.indexOf(emptyTile);
+              set[index]=tile;
+              set[i]=emptyTile;
+              let newPos = emptyTile.getPosition();
+              emptyTile.update( tile.x, tile.y);
+              tile.slideTo(newPos, function() {
+                
+              });
+              
+              this.spawnOnSlide=true;
+            } 
+          }
+        }  
+      }      
+    }
+  }
+  
+  getRandomRange(min,max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+}
+
+let board=new Board();
+board.newGame();
+
+$(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: // left
+        board.swipe("LEFT");
+        break;
+
+        case 38: // up
+        board.swipe("UP");
+        break;
+
+        case 39: // right
+        board.swipe("RIGHT");
+        break;
+
+        case 40: // down
+        board.swipe("DOWN");
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
+});
+
+$(document).on('swipeleft',function(e,data){
+  board.swipe("LEFT");
+  e.preventDefault();
+});
+$(document).on('swiperight',function(e,data){
+  board.swipe("RIGHT");
+  e.preventDefault();
+});
+$(document).on('swipeup',function(e,data){
+  board.swipe("UP");
+  e.preventDefault();
+});
+$(document).on('swipedown',function(e,data){
+  board.swipe("DOWN");
+  e.preventDefault();
+});
+
+$('#restart').click(function(){
+  board.newGame();
+});
+</script>
+
+</body>
+</html>
