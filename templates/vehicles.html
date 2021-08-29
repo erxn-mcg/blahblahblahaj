@@ -1,0 +1,38 @@
+{% extends 'layouts/main.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "vehicles" %}
+
+{% block app_content %}
+{% if current_user.is_active %}
+<p class="text-center">You are logged in as {{ current_user.username }}. Time to get the app!</p>
+{% endif %}
+<br />
+<br />
+<div class="img" style="text-align: center;">
+    <img style="height: 500px; float: left; margin-right: 50px;" src="https://i.postimg.cc/9f5XFqY0/login-bg.png">
+    <h2>Are you ready to delve into a world of Blåhaj Appreciation?</h2>
+    <h2>Yes?</h2>
+    <h2>Well, BlahBlahBlåhaj is the one and only application you need!</h2>
+    <br />
+    <p>From an arcade with 2 amazing games, to a Google Dialogflow-powered chat application, you will
+        never be far from the glory of Blåhaj. Find IKEA's near you with a handy Map tool, or write down 
+        notes with Blåhaj Lists! 
+    </p>
+    <br />
+    <h2>What are you waiting for?</h2>
+    <br />
+    <a href="https://github.com/erxn-mcg/blahblahblahaj">
+    <button style="Height: 50px; width: 250px; font-size: 30px; color: white; background: tomato; border: 2px solid white; border-radius: 10px;">GET IT NOW!</button>
+</a>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div>
+    <img style="height: 500px; float: left; margin: 40px;" src="https://i.postimg.cc/R0Z3ztSt/Blahaj-Arcade.png">
+    <img style="height: 500px; float: left; margin: 40px;" src="https://i.postimg.cc/zvKvkSjs/Blahaj-More.png">
+    <img style="height: 500px; float: left; margin: 40px;" src="https://i.postimg.cc/sfhMysrT/Screenshot-2021-08-28-at-20-53-19.png">
+</div>
+
+{% endblock %}

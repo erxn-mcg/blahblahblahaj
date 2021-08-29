@@ -1,0 +1,33 @@
+{% extends 'layouts/main.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "user" %}
+
+{% block app_content %}
+{% if current_user.is_active %}
+    <div class="profile text-center">
+        <div class="avatar">{{ current_user.first_name }}</div>
+        <h5>{{ current_user.first_name }} {{ current_user.last_name }}</h5>
+
+        <div class="desc">
+            <div class="label">User ID</div> 
+        {{ current_user.id }}
+        </div>
+
+        <div class="desc">
+            <div class="label">Location</div> 
+            <bf class="text-capitalize">{{ current_user.city }}</bf>
+        </div>
+    </div>
+{% endif %}
+
+
+{% if not current_user.is_owner %}
+    <hr>
+    <div class="text-center">
+        <form class="form form-horizontal" method="POST" action="/users/remove/{{ current_user.id }}">
+            {{ wtf.form_field(form_u.submit) }}
+        </form>
+    </div>
+{% endif %}
+
+{% endblock %}
